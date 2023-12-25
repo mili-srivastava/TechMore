@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Profilepicture from "./Profilepicture";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,6 +13,7 @@ const Signupform = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
 
   const router = useRouter();
 
@@ -36,21 +37,38 @@ const Signupform = () => {
       username: username,
       email: email,
       password: password,
+      profilePicUrl: selectedImage,
     };
 
     try {
       const response = await axios.post("/api/signup", data);
       console.log(response.data);
-      if (response.data.status === "200") {
-        toast.success("Signup Successfull");
+      if (response.data.status === 201) {
+        toast.success("Account Created Successfully");
         router.push("/login");
-      } else if (response.data.status === "401") {
-        toast.error("Invalid Credentials");
-      } else if (response.data.status === "400") {
-        toast.error("User Not Found");
+      }  else if (response.data.status === 400) {
+        toast.error("User Already Exists");
       }
+      else if (response.data.status === 500) {
+        toast.error("Something went wrong");
+      }
+
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleInput = (e: any) => {
+    const selectedFile = e.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setSelectedImage(reader.result as string);
+      };
+
+      reader.readAsDataURL(selectedFile);
     }
   };
   return (
@@ -75,7 +93,37 @@ const Signupform = () => {
             login to your account
           </Link>
         </p>
-        <Profilepicture />
+        <div className="mx-auto w-64 relative mt-5 cursor-pointer">
+          <div className="w-36 h-36 rounded-full absolute left-1/2 transform -translate-x-1/2 bg-gray-200">
+            {selectedImage && (
+              <Image
+                className="w-full h-full rounded-full"
+                src={selectedImage}
+                alt=""
+                width={500}
+                height={500}
+              />
+            )}
+          </div>
+          <div className="w-36 h-36 group hover:bg-gray-200 opacity-60 rounded-full absolute flex justify-center items-center cursor-pointer transition duration-500 left-1/2 transform -translate-x-1/2">
+            <label htmlFor="profile">
+              <Image
+                className="hidden group-hover:block w-12 cursor-pointer"
+                src="https://www.svgrepo.com/show/33565/upload.svg"
+                alt=""
+                width={500}
+                height={500}
+              />
+            </label>
+            <input
+              type="file"
+              id="profile"
+              accept="image/*"
+              onChange={handleInput}
+              hidden
+            />
+          </div>
+        </div>
       </div>
 
       <div className="mt-28 sm:mx-auto sm:w-full sm:max-w-md">
@@ -96,7 +144,7 @@ const Signupform = () => {
                   type="text"
                   onChange={(e) => setName(e.target.value)}
                   required
-                  value=""
+                  
                   className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
                 <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -130,7 +178,7 @@ const Signupform = () => {
                   placeholder="john"
                   type="text"
                   required
-                  value=""
+                  
                   className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
@@ -151,7 +199,7 @@ const Signupform = () => {
                   placeholder="user@example.com"
                   type="email"
                   required
-                  value=""
+                 
                   className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5
                 "
                 />

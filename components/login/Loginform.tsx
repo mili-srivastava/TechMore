@@ -43,12 +43,14 @@ const Loginform = () => {
         data
       );
       console.log(response.data);
-      if (response.data.status === "200") {
+      if (response.data.status === 200) {
         toast.success("Login Successfull");
         router.push("/");
-      } else if (response.data.status === "401") {
+      } 
+      else if (response.data.status === 401) {
         toast.error("Invalid Credentials");
-      } else if (response.data.status === "400") {
+      } 
+      else if (response.data.status === 400) {
         toast.error("User Not Found");
       }
     } catch (error) {

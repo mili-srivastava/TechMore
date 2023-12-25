@@ -16,6 +16,7 @@ export const POST = async (request: NextRequest) => {
       email: email,
       username: username,
       password: password,
+      profilePicUrl: profilePicUrl,
     } = reqBody;
 
     //check if user already exists
@@ -38,19 +39,20 @@ export const POST = async (request: NextRequest) => {
       email: email,
       username: username,
       password: hashedPassword,
+      profilePicUrl: profilePicUrl,
     });
 
     //save user
     await newUser.save();
 
     return NextResponse.json({
-      status: "201",
+      status: 201,
       message: "User created successfully",
       newUser,
     });
   } catch (error: any) {
     return NextResponse.json({
-      status: "500",
+      status: 500,
       message: error.message,
     });
   }

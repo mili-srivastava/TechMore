@@ -44,7 +44,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className={search? `hidden` :`px-5 py-3 flex justify-between items-center dark:bg-[#060811] border-b border-gray-800 bg-purple-200`}>
+      <div className={search? `hidden` :`px-5 fixed w-full py-3 flex justify-between items-center dark:bg-[#060811] border-b border-gray-800 bg-purple-200 z-30`}>
         <div className="flex gap-3 items-center">
           <IoMenu className="text-3xl cursor-pointer md:hidden" onClick={Openmenu} />
           <IoIosArrowDroprightCircle className={menu? `hidden` : `text-4xl md:flex hidden cursor-pointer absolute top-20 z-50 left-10`} onClick={Openmenu} />
@@ -61,8 +61,8 @@ const Navbar = () => {
           </Link>
 
         </div>
-        <div className="flex gap-7 items-center">
-          <LuPencilLine className="text-purple-900 text-2xl cursor-pointer dark:text-white" />
+        <div className="flex gap-7 items-center ">
+          <Link href="/createBlogs" className="bg-purple-700 p-2 rounded-full md:px-8 md:py-2  " ><LuPencilLine className="bg-purple-700  cursor-pointer text-white text-2xl" /></Link>
           <BsSearch className="text-2xl text-gray-600 cursor-pointer dark:text-white" onClick={Opensearch} />
           <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             {theme === "dark" ? (
@@ -121,7 +121,7 @@ const Navbar = () => {
         <div
           className={
             menu
-              ? `w-[60%] md:w-[25%] h-screen dark:bg-[#070a1a] bg-white  shadow-2xl light:shadow-gray-900 absolute top-0 px-5 pt-2`
+              ? `w-[60%] md:w-[25%] h-screen z-40 dark:bg-[#070a1a] bg-white  shadow-2xl light:shadow-gray-900 absolute top-0 px-5 pt-2`
               : `hidden`
           }
         >
@@ -156,7 +156,7 @@ const Navbar = () => {
           className={
             menu
               ? `dark:bg-[#020617] md:hidden bg-white h-screen w-[40%] absolute top-0 right-0 blur-sm`
-              : search?'hidden': `w-[5%] hidden md:flex dark:bg-[#060811] bg-purple-200 h-screen absolute top-[65px] left-0 shadow-xl shadow-purple-600`
+              : search?'hidden': `w-[5%] hidden md:flex z-20 dark:bg-[#060811] bg-purple-200 h-screen fixed top-[65px] left-0 shadow-xl shadow-purple-600`
           }
           onClick={Closemenu}
         ></div>

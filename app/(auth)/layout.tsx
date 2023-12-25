@@ -1,4 +1,4 @@
-import Head from "next/head";
+
 
 const metadata = {
   title: "TechMore",
@@ -13,11 +13,11 @@ import { Theme } from "@/containers";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+      </head>
       <body className="dark:bg-[#020617] h-screen">
       <Theme>{children}</Theme>
         </body>

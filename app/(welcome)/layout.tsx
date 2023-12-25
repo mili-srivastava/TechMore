@@ -5,22 +5,22 @@ import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 
 //import components
-import { Navbar } from "@/components/shared";
+
 import { Theme } from "@/containers";
-const metadata = {
-  title: "TechMore",
+const metaDatas = {
+  title: "Techie",
   description:
-    "TechMore is a blog application for developers and tech enthusiasts.",
+    "Techie is a blogging platform for developers to share their knowledge and connect with other developers.",
 };
 
 const poppins = Poppins({
   subsets: ["latin"],
   display: "swap",
-  weight:["400","500","600","700","800","900"],
+  weight: "400",
   variable: "--font-poppins",
 });
 
-export default function RootLayout({
+export default function WelcomeLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -29,13 +29,13 @@ export default function RootLayout({
     <html lang="en" className={poppins.variable}>
       <head>
         <meta charSet="UTF-8" />
-        <meta name="description" content={metadata.description} />
+        <meta name="description" content={metaDatas.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{metadata.title}</title>
+        <title>{metaDatas.title}</title>
       </head>
       <body className="dark:bg-[#020617] h-screen">
         <Theme>
-          <Navbar />
+          
 
           {children}
         </Theme>
