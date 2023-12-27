@@ -2,16 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  
-  
+.bg-gradient {
+  background: rgb(113, 0, 255);
+  background: radial-gradient(
+    circle,
+    rgba(113, 0, 255, 1) 0%,
+    rgba(173, 31, 118, 1) 100%
+  );
 }
 
-html{
+html {
   scroll-behavior: smooth;
   font-family: var(--font-poppins);
 }
-
 
 .text {
   background: linear-gradient(
@@ -23,4 +26,3 @@ html{
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-

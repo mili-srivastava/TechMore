@@ -1,4 +1,4 @@
-
+import { Poppins} from "next/font/google";
 
 const metadata = {
   title: "TechMore",
@@ -6,13 +6,20 @@ const metadata = {
     "TechMore is a blog application for developers and tech enthusiasts.",
 };
 
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight:["400","500","600","700","800","900"],
+  variable: "--font-poppins",
+});
+
 import "@/app/globals.css";
 
 import { Theme } from "@/containers";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en"  className={poppins.variable}>
       <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />

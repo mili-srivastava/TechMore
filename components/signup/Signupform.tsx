@@ -13,6 +13,7 @@ const Signupform = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
   const router = useRouter();
@@ -38,6 +39,7 @@ const Signupform = () => {
       email: email,
       password: password,
       profilePicUrl: selectedImage,
+      bio: bio,
     };
 
     try {
@@ -46,13 +48,11 @@ const Signupform = () => {
       if (response.data.status === 201) {
         toast.success("Account Created Successfully");
         router.push("/login");
-      }  else if (response.data.status === 400) {
+      } else if (response.data.status === 400) {
         toast.error("User Already Exists");
-      }
-      else if (response.data.status === 500) {
+      } else if (response.data.status === 500) {
         toast.error("Something went wrong");
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +132,7 @@ const Signupform = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-5  text-gray-700"
+                className="block text-sm font-medium leading-5  text-gray-500"
               >
                 Name
               </label>
@@ -144,29 +144,16 @@ const Signupform = () => {
                   type="text"
                   onChange={(e) => setName(e.target.value)}
                   required
-                  
-                  className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                  className="bg-transparent appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
-                <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-red-500"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
+                <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"></div>
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-3">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                className="block text-sm font-medium leading-5 text-gray-500"
               >
                 Username
               </label>
@@ -178,16 +165,15 @@ const Signupform = () => {
                   placeholder="john"
                   type="text"
                   required
-                  
-                  className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                  className="bg-transparent appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-3">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-5  text-gray-700"
+                className="block text-sm font-medium leading-5  text-gray-500"
               >
                 Email address
               </label>
@@ -199,30 +185,17 @@ const Signupform = () => {
                   placeholder="user@example.com"
                   type="email"
                   required
-                 
-                  className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5
+                  className="bg-transparent appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5
                 "
                 />
-                <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-red-500"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
+                <div className=" absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"></div>
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-3">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                className="block text-sm font-medium leading-5 text-gray-500"
               >
                 Password
               </label>
@@ -234,26 +207,25 @@ const Signupform = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   placeholder="••••••••••"
-                  className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                  className="bg-transparent appearance-none block w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
             </div>
 
             <div className="mt-6">
               <label
-                htmlFor="password_confirmation"
-                className="block text-sm font-medium leading-5 text-gray-700"
+                htmlFor="Bio"
+                className="block text-sm font-medium leading-5 text-gray-500"
               >
-                Confirm Password
+                Enter your Bio
               </label>
               <div className="mt-1 rounded-md shadow-sm">
-                <input
-                  id="password_confirmation"
-                  name="password_confirmation"
-                  type="password"
-                  required
-                  placeholder="••••••••••"
-                  className="bg-transparent appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                <textarea
+                  id="bio"
+                  name="bio"
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="What do you do?"
+                  className="bg-transparent appearance-none block w-full px-3 h-28 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 />
               </div>
             </div>

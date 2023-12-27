@@ -17,6 +17,7 @@ export const POST = async (request: NextRequest) => {
       username: username,
       password: password,
       profilePicUrl: profilePicUrl,
+      bio: bio,
     } = reqBody;
 
     //check if user already exists
@@ -40,6 +41,7 @@ export const POST = async (request: NextRequest) => {
       username: username,
       password: hashedPassword,
       profilePicUrl: profilePicUrl,
+      bio: bio,
     });
 
     //save user
