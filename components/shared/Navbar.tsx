@@ -191,7 +191,7 @@ const Navbar = () => {
         <div
           className={
             menu
-              ? `w-[50%] md:w-[35%] lg:w-[25%] h-screen z-40 dark:bg-[#070a1a] bg-white  shadow-2xl light:shadow-gray-900 absolute top-0 px-5 pt-2`
+              ? `w-[70%] md:w-[35%] lg:w-[25%] h-screen z-40 dark:bg-[#070a1a] bg-white  shadow-2xl light:shadow-gray-900 absolute top-0 px-5 pt-2`
               : `hidden`
           }
         >
@@ -218,14 +218,16 @@ const Navbar = () => {
           <div className="mt-12 flex flex-col gap-2 mx-4">
             <Link
               href="/"
+              onClick={Closemenu}
               className="text-center hover:bg-slate-400 flex items-center gap-2 px-5 py-2 rounded-xl font-medium text-sm"
             >
               {" "}
-              <MdOutlineFeed className="text-2x" />
+              <MdOutlineFeed className="text-2xl" />
               My Feed
             </Link>
             <Link
-              href="/"
+              href={`/profile/${userData?.name}`}
+              onClick={Closemenu}
               className="text-center flex items-center gap-2 hover:bg-slate-400 px-5 py-2 rounded-xl font-medium text-sm"
             >
               {" "}
@@ -234,6 +236,7 @@ const Navbar = () => {
             </Link>
             <Link
               href="/"
+              onClick={Closemenu}
               className="text-center flex items-center gap-2 hover:bg-slate-400 px-5 py-2 rounded-xl font-medium text-sm"
             >
               {" "}

@@ -30,7 +30,7 @@ const ProfileContent = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="h-36 md:h-32 bg-gradient">
+      <div className="h-44 md:h-44 bg-gradient">
         <p className="text-3xl justify-end flex py-2 px-5 gap-2"><span>0</span> Blogs</p>
       </div>
       <div>
@@ -47,7 +47,7 @@ const ProfileContent = () => {
         <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-500">{userData?.username}</p>
         <p className="w-64 mx-auto mt-3">{userData?.bio}</p>
         <div className="">
-        <Link href="/editProfile" className="bg-pink-700 px-5 py-2 rounded-full font-medium mt-5 ">Edit Profile</Link>
+        <Link href="/editProfile" className="bg-pink-700 px-5 py-3 rounded-full font-medium mt-5 ">Edit Profile</Link>
         <button className="bg-purple-700 mx-5 px-5 py-2 rounded-full font-medium mt-5 ">Share Profile</button>
         </div>
        </div>
