@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   FacebookIcon,
-  FacebookMessengerShareButton,
   FacebookShareButton,
   LinkedinIcon,
   LinkedinShareButton,
@@ -33,8 +32,10 @@ const ProfileContent = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/getUserData");
-      console.log(response.data.userData);
-      setUserData(response.data.userData);
+      const res = await response.data;
+      if (res.userData) {
+        setUserData(res.userData);
+      }
     } catch (error: any) {
       console.log(error.message);
     }
@@ -44,7 +45,9 @@ const ProfileContent = () => {
     fetchData();
   }, []);
 
-  const shareUrl = `https://techmore-orcin.vercel.app/profile/${userData?.username}` || `localhost:3000/profile/${userData?.username}`;
+  const shareUrl =
+    `https://techmore-orcin.vercel.app/profile/${userData?.username}` ||
+    `localhost:3000/profile/${userData?.username}`;
 
   return (
     <div className="flex flex-col">
@@ -107,7 +110,6 @@ const ProfileContent = () => {
             </div>
 
             <div className="flex gap-7 my-5">
-             
               <div>
                 <LinkedinShareButton
                   url={shareUrl}
