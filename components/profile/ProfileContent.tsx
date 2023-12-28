@@ -33,7 +33,9 @@ const ProfileContent = () => {
     try {
       const response = await axios.get("/api/getUserData");
       const res = await response.data;
+      console.log(72536214)
       if (res.userData) {
+        console.log(res.userData)
         setUserData(res.userData);
       }
     } catch (error: any) {
