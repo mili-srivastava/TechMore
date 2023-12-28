@@ -20,6 +20,7 @@ import { userData } from "@/types";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineFeed } from "react-icons/md";
 import { RiAccountPinBoxFill } from "react-icons/ri";
+import { set } from "mongoose";
 
 const Navbar = () => {
   const [mounted, setMounted] = useState(false);
@@ -51,8 +52,11 @@ const Navbar = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/getUserData");
-      setLogin(true);
-      setUserData(response.data.userData);
+      if (response.data.userData) {
+        setLogin(true);
+      }
+      const res = await response.data;
+      setUserData(res.userData);
     } catch (error: any) {
       console.log(error.message);
       toast.error("something went wrong while fetching data");
@@ -71,16 +75,18 @@ const Navbar = () => {
 
   const logOut = async () => {
     try {
-      await axios.get("/api/logOut");
-      toast.success("Logged out successfully");
-      setLogin(false);
-      Closemenu();
-      setUserData({
-        name: "",
-        username: "",
-        profilePicUrl: "",
-      });
-      router.push("/");
+      const res = await axios.get("/api/logOut");
+      if (res.data.status === 200) {
+        toast.success(res.data.message);
+        setLogin(false);
+        setUserData({
+          name: "",
+          username: "",
+          profilePicUrl: "",
+        });
+        Closemenu();
+        router.push("/");
+      }
     } catch (error: any) {
       console.log(error.message);
       toast.error("something went wrong");
@@ -226,7 +232,7 @@ const Navbar = () => {
               My Feed
             </Link>
             <Link
-              href={`/profile/${userData?.name}`}
+              href={`/profile/${userData?.username}`}
               onClick={Closemenu}
               className="text-center flex items-center gap-2 hover:bg-slate-400 px-5 py-2 rounded-xl font-medium text-sm"
             >
@@ -240,7 +246,7 @@ const Navbar = () => {
               className="text-center flex items-center gap-2 hover:bg-slate-400 px-5 py-2 rounded-xl font-medium text-sm"
             >
               {" "}
-            <MdSettingsSuggest  className="text-2xl" />
+              <MdSettingsSuggest className="text-2xl" />
               Account Details
             </Link>
             <Link
