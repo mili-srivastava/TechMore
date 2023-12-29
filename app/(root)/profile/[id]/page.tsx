@@ -1,17 +1,13 @@
 import ProfileContent from "@/components/profile/ProfileContent";
 
 
-const page = ({
-  params,
-}: {
-  params: {
-    id: string;
-  },
+const page = ({params,}: {params: {id: string;},
 }) => {
-  console.log(params);
+  
   return (
     <div>
-      <ProfileContent  />
+      {/* <ProfileContent username = {params.id} /> */}
+      <p>{params.id}</p>
     </div>
   );
 };
