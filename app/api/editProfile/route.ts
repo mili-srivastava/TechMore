@@ -18,7 +18,7 @@ export const POST = async (request: NextRequest) => {
 
 
 
-    const userId = await getTokenData(request);
+    const userId = await getTokenData();
 
     const userData = await User.findById(userId).select("-password");
     userData.name = name;
