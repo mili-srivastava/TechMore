@@ -52,7 +52,9 @@ const Navbar = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/getUserData");
+      console.log(response)
       if (response.data.userData) {
+        console.log(response.data.userData)
         setLogin(true);
       }
       const res = await response.data;
