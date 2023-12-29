@@ -1,5 +1,5 @@
 export type userData = {
-    id?: string;
+    _id?: string;
     email?: string;
     username?: string;
     profilePicUrl?: string;
