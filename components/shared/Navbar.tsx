@@ -21,6 +21,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdOutlineFeed } from "react-icons/md";
 import { RiAccountPinBoxFill } from "react-icons/ri";
 import { set } from "mongoose";
+import { fetchUserData } from "@/actions/user.action";
 
 const Navbar = () => {
   const [mounted, setMounted] = useState(false);
@@ -50,19 +51,12 @@ const Navbar = () => {
   };
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/getUserData");
-      console.log(response)
-      if (response.data.userData) {
-        console.log(response.data.userData)
-        setLogin(true);
-      }
-      const res = await response.data;
-      setUserData(res.userData);
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error("something went wrong while fetching data");
+    const response = await fetchUserData();
+    console.log(response);
+    if (response) {
+      setUserData(response);
     }
+    setUserData(response);
   };
 
   const { theme, setTheme } = useTheme();
