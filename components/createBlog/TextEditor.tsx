@@ -2,9 +2,7 @@
 import { formats, modules } from "@/constants";
 import dynamic from "next/dynamic";
 import axios from "axios";
-
 import React, { useEffect, useState } from "react";
-
 import "react-quill/dist/quill.snow.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,7 +21,7 @@ const TextEditor = () => {
   });
 
 
-  const [selectedThumbanil, setSelectedThumbnail] = useState("");
+  const [selectedThumbnail, setSelectedThumbnail] = useState("");
 
   const router = useRouter();
 
@@ -67,11 +65,11 @@ useEffect(() => {
       title: title,
       description: description,
       content: blogData,
-      thumbanil: selectedThumbanil,
+      thumbnail: selectedThumbnail,
       author: userData._id,
     };
 
-    if (!title || !description || !blogData || !selectedThumbanil) {
+    if (!title || !description || !blogData || !selectedThumbnail) {
       toast.error("Please fill all the fields");
       return;
     }
@@ -152,5 +150,4 @@ useEffect(() => {
     </div>
   );
 };
-
 export default TextEditor;

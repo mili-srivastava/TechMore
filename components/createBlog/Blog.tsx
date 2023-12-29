@@ -1,15 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { blogData } from "@/types";
 
 const Blog = () => {
+  const [blogs, setBlogs] = useState<blogData[]>([{
+    title: "",
+    description: "",
+    content: "",
+    thumbnail: "",
+    author: "",
+  }]
+    
+);
+
+  const getBlogs = async () => {
+    const res = await axios.get("/api/showBlogs");
+    if(res.data.blogs)
+    console.log(res.data.blogs);
+    setBlogs(res.data.blogs);
+  };
+
+  useEffect(() => {
+    getBlogs();
+  }, []);
   return (
-    <div>
-      <div className="max-w-80 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {
+        blogs.map((blog: blogData) => (
+          <div key={blog._id} className="max-w-80 shadow-lg shadow-purple-950 bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700">
         <Link href="#">
           <Image
             className="rounded-t-lg h-40 object-cover w-full"
-            src="/user.png"
+            src={blog.thumbnail || ""}
             alt=""
             width={500}
             height={500}
@@ -18,12 +44,11 @@ const Blog = () => {
         <div className="p-5">
           <Link href="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              Noteworthy technology acquisitions 2021
+              {blog.title}
             </h5>
           </Link>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
+            {blog.description}
           </p>
           <Link
             href="#"
@@ -48,6 +73,11 @@ const Blog = () => {
           </Link>
         </div>
       </div>
+         
+        ))
+      }
+      
+      
     </div>
   );
 };

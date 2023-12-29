@@ -6,3 +6,13 @@ export type userData = {
     name?: string;
     bio?: string;
 }
+
+export type blogData = {
+    _id?: string;
+    title?: string;
+    description?: string;
+    content?: string;
+    author?: string;
+    thumbnail?: string;
+    
+}
