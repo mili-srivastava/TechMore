@@ -15,6 +15,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
+import { fetchUserData } from "@/actions/user.action";
 
 const ProfileContent = () => {
   const [userData, setUserData] = useState<userData>({
@@ -30,17 +31,13 @@ const ProfileContent = () => {
   };
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/getUserData");
-      const res = await response.data;
-      console.log(res)
-      console.log(72536214)
-      if (res.userData) {
-        setUserData(res.userData);
+   
+      const response = await fetchUserData();
+      console.log(response)
+      if (response) {
+        setUserData(response);
       }
-    } catch (error: any) {
-      console.log(error.message);
-    }
+     
   };
 
   useEffect(() => {
