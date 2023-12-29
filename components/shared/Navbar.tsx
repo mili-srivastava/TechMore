@@ -54,7 +54,9 @@ const Navbar = () => {
     const response = await fetchUserData();
     console.log(response);
     if (response) {
+      setLogin(true);
       setUserData(response);
+      
     }
     setUserData(response);
   };

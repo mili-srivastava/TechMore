@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RxCross2 } from "react-icons/rx";
+import { fetchUserData } from "@/actions/user.action";
 
 const EditProfile = () => {
   const [userData, setUserData] = useState<userData>({
@@ -41,14 +42,14 @@ const EditProfile = () => {
   }
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get("/api/getUserData");
-      console.log(response.data.userData);
-      setUserData(response.data.userData);
-    } catch (error: any) {
-      console.log(error.message);
+   
+    const response = await fetchUserData();
+    console.log(response)
+    if (response) {
+      setUserData(response);
     }
-  };
+   
+};
 
   useEffect(() => {
     fetchData();

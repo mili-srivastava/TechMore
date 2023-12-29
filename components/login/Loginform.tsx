@@ -46,7 +46,7 @@ const Loginform = () => {
       if (response.data.status === 200) {
         toast.success("Login Successfull");
         console.log(response.data.message);
-        // router.push("/");
+        router.push("/");
       } 
       else if (response.data.status === 401) {
         toast.error("Invalid Credentials");
