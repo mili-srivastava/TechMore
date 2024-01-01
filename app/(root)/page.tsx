@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='ml-20 mt-20'>
+    <div className='lg:ml-20 w-fit mx-auto  mt-20'>
         <Blog />
     </div>
   )

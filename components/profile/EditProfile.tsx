@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RxCross2 } from "react-icons/rx";
-import { fetchUserData } from "@/actions/user.action";
+import { fetchUserData, removeProfilePicture } from "@/actions/user.action";
 
 const EditProfile = () => {
   const [userData, setUserData] = useState<userData>({
@@ -63,6 +63,7 @@ const EditProfile = () => {
 
       reader.onloadend = () => {
         setSelectedImage(reader.result as string);
+        closeModal();
       };
 
       reader.readAsDataURL(selectedFile);
@@ -99,7 +100,7 @@ const EditProfile = () => {
     <div className="mt-20">
       <Image
         src={
-          selectedImage ? selectedImage : userData?.profilePicUrl || "/user.png"
+          selectedImage ? selectedImage : userData?.profilePicUrl || ""
         }
         width={500}
         height={500}
@@ -234,30 +235,13 @@ const EditProfile = () => {
                   accept="image/*"
                   onChange={handleInput}
                 />
-                <button className="flex cursor-pointer items-center gap-2 text-xl dark:text-gray-400">
+                <button 
+                onClick={()=>removeProfilePicture() .then(()=>closeModal()) .then(()=>window.location.reload())}
+                 className="flex cursor-pointer items-center gap-2 text-xl dark:text-gray-400">
                   <IoTrash className="text-red-500" />
                   Remove Profile Picture
                 </button>
-              </div>
-
-              <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                <button
-                  data-modal-hide="default-modal"
-                  type="button"
-                  onClick={closeModal}
-                  className="text-white bg-green-600 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
-                >
-                  Save Changes
-                </button>
-                <button
-                  data-modal-hide="default-modal"
-                  type="button"
-                  onClick={closeModal}
-                  className="ms-3  bg-red-600 hover:bg-red-700  rounded-lg text-white text-sm font-medium px-5 py-2.5 focus:z-10 dark:text-gray-300 "
-                >
-                  Discard
-                </button>
-              </div>
+              </div> 
             </div>
           </div>
         </div>

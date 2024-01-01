@@ -1,16 +1,14 @@
 import ProfileContent from "@/components/profile/ProfileContent";
 
+const page = ({ params }: { params: { id: string } }) => {
+  const decoded = decodeURIComponent(params.id);
 
-const page = ({params,}: {params: {id: string;},
-}) => {
-  
   return (
     <div>
-      <ProfileContent  />
+      <ProfileContent username={decoded} />
+      
     </div>
   );
 };
 
 export default page;
-
-

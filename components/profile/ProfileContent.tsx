@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import axios from "axios";
 import { userData } from "@/types";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -15,9 +14,9 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { fetchUserData } from "@/actions/user.action";
+import { fetchDataByUsername, } from "@/actions/user.action";
 
-const ProfileContent = () => {
+const ProfileContent = ({username}: userData) => {
   const [userData, setUserData] = useState<userData>({
     name: "",
     username: "",
@@ -30,19 +29,18 @@ const ProfileContent = () => {
     setModal(!modal);
   };
 
-  const fetchData = async () => {
-   
-      const response = await fetchUserData();
-      console.log(response)
-      if (response) {
-        setUserData(response);
-      }
-     
-  };
+    const getuserDetails = async () =>{
+      const res = await fetchDataByUsername(username);
+      console.log(username)
+      console.log(res);
+      setUserData(res);
+    }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    useEffect(() => {
+      getuserDetails();
+    }, []);
+
+
 
   const shareUrl =
     `https://techmore-orcin.vercel.app/profile/${userData?.username}` ||

@@ -19,3 +19,4 @@ export const getTokenData = async () => {
     throw new Error(error.message);
   }
 };
+

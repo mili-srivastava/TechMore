@@ -34,3 +34,7 @@ export const modules = {
     "image",
     "video",
   ];
+
+  export const blogModules = {
+    toolbar: false,
+  };
