@@ -165,7 +165,7 @@ const ProfileContent = ({username}: userData) => {
                   className="w-full outline-none bg-transparent"
                   type="text"
                   placeholder="link"
-                  value="https://boxicons.com/?query=link"
+                  value={shareUrl}
                 />
 
                 <button className="bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600">
